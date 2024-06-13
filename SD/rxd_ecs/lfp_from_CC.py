@@ -1,19 +1,17 @@
 import os
 import h5py
 import numpy as np
-import matplotlib.pyplot as plt
 import csv
-import  math
+import math
 
 
-hdf5_files='D:/results/ep1'
-coordinates_file='D:/results/ep1/cord.csv'
+hdf5_files=''
+coordinates_file=''
 
 
 def load_voltages(path):
     '''
     Load from folder with results
-    Do not read files with epilepsy
     Args:
 		filepath (str): path to the file
 	Returns:
@@ -116,7 +114,7 @@ def main():
     lfp = calculation_simple_LFP(fraction)
 
     #save lpf in hdf5 file
-    with h5py.File('D:/results/lfp/ts50e', 'w') as hf:
+    with h5py.File('', 'w') as hf:
         group = hf.create_group('lfp')
         for key, value in lfp.items():
             group[key] = value

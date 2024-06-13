@@ -1,21 +1,29 @@
-import os
 import h5py
 import numpy as np
 import matplotlib.pyplot as plt
-import scipy
 from scipy.signal import argrelextrema
 from itertools import chain
 import scipy.stats as st
 from bokeh.plotting import figure, show
 import plotly.offline as py
 import plotly.graph_objects as go
+from collections import OrderedDict
 
-Y_OFFSET = 1000
+Y_OFFSET = 300
 flatten = chain.from_iterable
 varb = 1
 
+const = 300
+
 
 def load_cc_lfp(filepath):
+    '''
+        Load from folder with results
+        Args:
+    		filepath (str): path to the file
+    	Returns:
+    		dict: dictionary with keys and values
+    '''
     lfp_cc = {}
     with h5py.File(filepath, 'r') as file:
         def traverse(group, prefix=""):
@@ -29,45 +37,70 @@ def load_cc_lfp(filepath):
         traverse(file)
     return lfp_cc
 
-def plotting_lfp(lfps):
-    yx=1
-    fig, ax = plt.subplots()
-    keys = list((lfps.keys()))
-    keys.sort(reverse=True)
-    legend = []
-    for index, key in enumerate(keys):
-        plt.plot(np.array(lfps[key]) + yx*1e-11)
-        yx+=1
-        legend.append(index)
-    plt.legend(legend)
-    plt.show()
-    print(1)
 
-def plot_lfp_bokeh(lfp):
-    colors = ['black', 'red', 'green', 'blue', 'indigo', 'crimson', 'orange', 'gold', 'gray','maroon', 'navy', 'purple', 'olive', 'cyan', 'brown', 'lime']
-    keys = list(lfp.keys())
-    keys.sort(reverse=True)
-    yx = 1
+def plot_lfp(lfp, matplotlib=False, bokeh=False):
+    '''
+        plot lfp graph
+        Args:
+    		lfp: dictionary with keys and values
+    		matplotlib (bool): choose lib
+    		bokeh (bool): choose lib
+    	Returns:
+    		dict: dictionary with keys and values
+        '''
+    colors = ['black', 'navy', 'darkslateblue', 'indigo', 'purple', 'darkorchid', 'firebrick', 'indianred',
+              'palevioletred', 'lightcoral', 'salmon', 'sandybrown', 'lightsalmon', 'orange', 'gold', 'yellow','yellowgreen']
+    data = {}
+    for key, value in lfp.items():
+        new_key = int(key.split("/")[-1])
+        data[new_key] = value
 
-    p = figure(x_axis_label='Ms', y_axis_label='Sensors')
-    p.yaxis.major_label_text_font_size = '0pt'
-    x_values = np.linspace(0, 50, num=2001)
+    sorted_keys = sorted(data.keys(), reverse=True)
+    ordered_data = OrderedDict()
+    for index, key in enumerate(sorted_keys):
+        ordered_data[index] = data[key]
 
-    for i, key in enumerate(keys):
-        y = np.array(lfp[key]) + yx * 1600
-        x = x_values
-        # x = np.arange(len(lfp[key]))
-        # x = np.arange(len(lfp[key]))
-        p.line(x, y, line_width=2, color=colors[i])
-        yx+=1
-    show(p)
+    if matplotlib:
+        fig, ax = plt.subplots()
 
-    p.legend.location = 'top_left'
+        for key, data in ordered_data.items():
+            xticks = np.linspace(0, 50, len(data))
+            ax.plot(xticks, data + key * const, lw=1.5, color=colors[key])
 
-    # show(p)
-    print(1)
+        ax.set_yticks(np.arange(16) * const)
+        ax.set_yticklabels(np.arange(16))
+
+        plt.xlabel('Time (ms)')
+        plt.ylabel('Sensors № (mV)')
+        plt.show()
+
+    if bokeh:
+        p = figure(x_axis_label='Time (ms)', y_axis_label='Sensors')
+        # p.yaxis.major_label_text_font_size = '0pt'
+
+        x_values = np.linspace(0, 50, num=2001)
+
+        for key in ordered_data:
+            # xticks = np.arange(len(data[key]))
+            xticks = x_values
+            y_offset = key * 3000
+            # plot the curve
+            p.line(xticks, np.array(ordered_data[key]) + y_offset, line_width=2, color=colors[key])
+        show(p)
+
+    return ordered_data
+
 
 def find_extrema(array, condition):
+    """
+    	Advanced wrapper of numpy.argrelextrema
+    	Args:
+    		array (np.ndarray): data array
+    		condition (np.ufunc): e.g. np.less (<), np.great_equal (>=) and etc.
+    	Returns:
+    		np.ndarray: indexes of extrema
+    		np.ndarray: values of extrema
+    """
     indexes = np.ndarray
     for i in array:
         indexes = argrelextrema(array, condition)[0]
@@ -81,20 +114,27 @@ def find_extrema(array, condition):
     return indexes, values
 
 def peak_finding(sensors_data, dstep, border_time, border_ampl, debug = False):
-
-    # layers_num = len(sensors_data)
+    """
+    	Function for extrema (peaks) finding
+    	Args:
+    		channels_data (np.ndarray): 2D array (channel, channel data)
+    		dstep (float): data step size
+    		border_time (list): the time border [min, max]
+    		border_ampl (list): the amplitude border [min, max]
+    		debug (bool): debug mode (plotting)
+    	Returns:
+    		list: peak times, amplitudes and channels
+    """
     layers_num, _ = sensors_data.shape
-
-    varb = 1
 
     peaks_time= [[] for _ in range(layers_num)]
     peaks_ampl = [[] for _ in range(layers_num)]
     peaks_chan = [[] for _ in range(layers_num)]
 
-    colors = ['black', 'red', 'blue', 'green']
-
-    p = figure(x_axis_label='Ms', y_axis_label='Sensors')
+    p = figure(x_axis_label='Time (ms)', y_axis_label='Sensors')
     p.yaxis.major_label_text_font_size = '0pt'
+
+    fig, ax = plt.subplots()
 
     for index, channel in enumerate(sensors_data):
         # combine slices into one myogram
@@ -120,40 +160,56 @@ def peak_finding(sensors_data, dstep, border_time, border_ampl, debug = False):
                 peaks_chan[index].append(index)
                 max_value_peaks.append(max_value)
 
-        # if debug:
-        #     xticks = np.arange(len(channel)) * dstep
-        #     y_offset = index * 1e-9
-        #     # plot the curve
-        #     plt.plot(xticks, channel + y_offset, color='k')
-        #     # plot the extrema
-        #     plt.plot(e_max_inds * dstep, e_max_vals + y_offset, '.', color='r')
-        #     plt.plot(e_min_inds * dstep, e_min_vals + y_offset, '.', color='b')
-        #     # plot the peaks
-        #     x = np.asarray(peaks_time[index]) * dstep
-        #     y = np.asarray(max_value_peaks) + np.asarray(peaks_chan[index]) * Y_OFFSET
-        #     plt.plot(x, y, '.', color='g', ms=20)
-
         if debug:
             xticks = np.arange(len(channel)) * dstep
             y_offset = index * Y_OFFSET
             # plot the curve
-            p.line(xticks, channel + y_offset, color=colors[0])
+            plt.plot(xticks, channel + y_offset, color='k')
             # plot the extrema
-            p.circle(e_max_inds * dstep, e_max_vals + y_offset, color=colors[1])
-            p.circle(e_min_inds * dstep, e_min_vals + y_offset, color=colors[2])
+            plt.plot(e_max_inds * dstep, e_max_vals + y_offset, '.', color='r')
+            plt.plot(e_min_inds * dstep, e_min_vals + y_offset, '.', color='b')
             # plot the peaks
             x = np.asarray(peaks_time[index]) * dstep
             y = np.asarray(max_value_peaks) + np.asarray(peaks_chan[index]) * Y_OFFSET
-            p.circle(x, y, color=colors[3])
+            plt.plot(x, y, '.', color='g', ms=5)
+
+        # if debug:
+        #     xticks = np.arange(len(channel)) * dstep
+        #     y_offset = index * Y_OFFSET
+        #     # plot the curve
+        #     p.line(xticks, channel + y_offset, color=colors[0])
+        #     # plot the extrema
+        #     p.circle(e_max_inds * dstep, e_max_vals + y_offset, color=colors[1])
+        #     p.circle(e_min_inds * dstep, e_min_vals + y_offset, color=colors[2])
+        #     # plot the peaks
+        #     x = np.asarray(peaks_time[index]) * dstep
+        #     y = np.asarray(max_value_peaks) + np.asarray(peaks_chan[index]) * Y_OFFSET
+        #     p.circle(x, y, color=colors[3])
 
     if debug:
-        # plt.show()
-        show(p)
+        ax.set_yticks(np.arange(16) * Y_OFFSET)
+        ax.set_yticklabels(np.arange(16))
+
+        plt.xlabel('Time (ms)')
+        plt.ylabel('Sensors № (mV)')
+        plt.show()
+        # show(p)
 
     return peaks_time, peaks_ampl, peaks_chan
 
 def plot_3D_density(X, Y, xmin, xmax, ymin, ymax, factor=8, filepath=None):
-
+    """
+    	Plots the 3D density graphics
+    	Args:
+    		X (np.ndarray): flatten 1D array
+    		Y (np.ndarray): flatten 1D array
+    		xmin (float or int): minimal X data value
+    		xmax (float or int): maximal X data value
+    		ymin (float or int): minimal Y data value
+    		ymax (float or int): maximal Y data value
+    		factor (float or int): gridsize factor
+    		filepath (str): filepath for .html saving
+    """
     if filepath is None:
         return
     # form a mesh grid
@@ -168,11 +224,11 @@ def plot_3D_density(X, Y, xmin, xmax, ymin, ymax, factor=8, filepath=None):
     # use a Gaussian KDE
     a = st.gaussian_kde(values)(positions).T
 
-    # with open('', 'w') as f:
+    # with open('filepath', 'w') as f:
     #     for line in a:
     #         f.write(str(line))
     #         f.write('\n')
-            # print(1)
+    #         # print(1)
 
     # re-present grid back to 2D
     z = np.reshape(a, xmesh.shape)
@@ -188,34 +244,33 @@ def plot_3D_density(X, Y, xmin, xmax, ymin, ymax, factor=8, filepath=None):
     # plot the 3D
     fig = go.Figure(data=surface)
     # change a camera view and etc
-    fig.update_layout(title=f'test title', width=1000, height=800, autosize=False,
+    fig.update_layout(title=f'Sim rat 1', width=1000, height=800, autosize=False,
                       scene_camera=dict(up=dict(x=0, y=0, z=1), eye=dict(x=-1.25, y=-1.25, z=1.25)),
                       scene=dict(xaxis=dict(title_text="Time, ms",
                                             titlefont=dict(size=30),
                                             ticktext=list(range(26))),
-                                 yaxis=dict(title_text="Channel №",
+                                 yaxis=dict(title_text="Sensor №",
                                             titlefont=dict(size=30),
                                             tickvals=list(range(ymax + 1)),
                                             ticktext=list(range(1, ymax + 2))),
+                                 zaxis=dict(title_text="Density"),
                                  aspectratio={"x": 1, "y": 1, "z": 0.5}))
 
-    py.plot(fig, validate=False, filename=f"{filepath}/12.html", auto_open=True)
+    py.plot(fig, validate=False, filename=f"{filepath}/test.html", auto_open=True)
 
 
 def main():
     path = ''
     lfp_cc = load_cc_lfp(path)
+    lfp = plot_lfp(lfp_cc, matplotlib=True)
 
-    # plotting_lfp(lfp_cc)
-    plot_lfp_bokeh(lfp_cc)
-
-    file_folder = 'D:/results/grafs'
+    file_folder = ''
 
     border_time = [.0, 250]
     border_ampl = [-100, np.inf]
     dstep = 0.025
 
-    lfp_data = np.array(list(lfp_cc.values()))
+    lfp_data = np.array(list(lfp.values()))
     peaks_time, peaks_ampl, peaks_chan = peak_finding(lfp_data, dstep, border_time, border_ampl, debug=True)
 
     x_data = np.array(list(flatten(peaks_time))) * 0.025
@@ -223,8 +278,6 @@ def main():
     z_data = np.array(list(flatten(peaks_ampl)))
 
     plot_3D_density(x_data, y_data, xmin=0, xmax=60, ymin=0, ymax=17, filepath=file_folder)
-
-    # calc_kde(lfp_data)
 
 
 if __name__ == "__main__":
