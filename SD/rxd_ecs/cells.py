@@ -108,13 +108,13 @@ class Bask23(Cell):
                             'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).naf2.gbar = 0.06  # 0.06  # 0.5
-        self.soma(0.5).kdr_fs.gbar = 0.1 * 3  # 0.001
-        self.soma(0.5).IKsin.gKsbar = 0.000725 * 0.1
+        self.soma(0.5).naf2.gbar = 0.0559  # random.gauss(0.06, 0.01)  # 0.06  # 0.5
+        self.soma(0.5).kdr_fs.gbar = 0.279  # random.gauss(0.3, 0.1) #0.2811054 #0.1 * 3  # 0.001
+        self.soma(0.5).IKsin.gKsbar = 0.00007239  # random.gauss(0.0000725, 0.00001) #0.000725 * 0.1
         self.soma(0.5).hin.gbar = 0.00001
         self.soma(0.5).kapin.gkabar = 0.001 * 10  # 0.0032 * 15
         self.soma(0.5).canin.gcalbar = 0.0001  # 0.0003
-        self.soma(0.5).kctin.gkcbar = 0.025  # 0.0001
+        self.soma(0.5).kctin.gkcbar = 0.0239  # new #0.025  # 0.0001
         self.soma(0.5).nap.gnapbar = 0.0006  # missing in this neuron
         self.soma(0.5).pas.g = 0.001
         self.soma(0.5).pas.e = -65  # -70
@@ -130,34 +130,34 @@ class Bask23(Cell):
             self.dend3.insert(mechanism_d)
             self.dend4.insert(mechanism_d)
 
-        self.dend(0.5).Nafin.gnafbar = 0.06  # 0.00018 * 10
+        self.dend(0.5).Nafin.gnafbar = random.gauss(0.06, 0.02)  # 0.06  # 0.00018 * 10
         self.dend(0.5).kdrin.gkdrbar = 0.1 * 3
-        self.dend(0.5).kapin.gkabar = 0.001 * 10  # 0.000032 * 15 * 10
+        self.dend(0.5).kapin.gkabar = random.gauss(0.01, 0.02)  # 0.001 * 10  # 0.000032 * 15 * 10
         self.dend(0.5).nap.gnapbar = 0.0006  # 0.000018
         self.dend(0.5).pas.g = 0.01
         self.dend(0.5).pas.e = -65  # -73
         self.dend.Ra = 200  # 150
 
-        self.dend1(0.5).Nafin.gnafbar = 0.06  # 0.00018 * 10
+        self.dend1(0.5).Nafin.gnafbar = random.gauss(0.06, 0.02)  # 0.06  # 0.00018 * 10
         self.dend1(0.5).kdrin.gkdrbar = 0.1 * 3
-        self.dend1(0.5).kapin.gkabar = 0.001 * 10
+        self.dend1(0.5).kapin.gkabar = random.gauss(0.01, 0.02)  # 0.001 * 10
         self.dend1(0.5).nap.gnapbar = 0.0006
         self.dend1(0.5).pas.g = 0.01
         self.dend1(0.5).pas.e = -65  # -73
         self.dend1.Ra = 200  # 150
 
-        self.dend2(0.5).nap.gnapbar = 0.0001
+        self.dend2(0.5).nap.gnapbar = 0.0000989  # random.gauss(0.0001, 0.0002) #0.0001
         self.dend2(0.5).Nafin.gnafbar = 0.01  # 0.00018 * 10
         self.dend2(0.5).kdrin.gkdrbar = 0.01 * 3
-        self.dend2(0.5).kapin.gkabar = 0.001 * 10
+        self.dend2(0.5).kapin.gkabar = 0.00978  # random.gauss(0.01, 0.02) #0.001 * 10
         self.dend2(0.5).pas.g = 0.01
         self.dend2(0.5).pas.e = -65  # -73
         self.dend2.Ra = 200  # 150
 
         self.dend3(0.5).nap.gnapbar = 0.0001
-        self.dend3(0.5).Nafin.gnafbar = 0.01  # 0.00018 * 10
+        self.dend3(0.5).Nafin.gnafbar = random.gauss(0.01, 0.02)  # 0.01  # 0.00018 * 10
         self.dend3(0.5).kdrin.gkdrbar = 0.01 * 3
-        self.dend3(0.5).kapin.gkabar = 0.001 * 10
+        self.dend3(0.5).kapin.gkabar = random.gauss(0.01, 0.02)  # 0.001 * 10
         self.dend3(0.5).pas.g = 0.01
         self.dend3(0.5).pas.e = -65  # -73
         self.dend3.Ra = 200  # 150
@@ -174,8 +174,8 @@ class Bask23(Cell):
         for mechanism_a in ['Nafin', 'kdrin', 'pas']:
             self.axon.insert(mechanism_a)
 
-        self.axon(0.5).Nafin.gnafbar = 0.4  # 0.4  # 0.5
-        self.axon(0.5).kdrin.gkdrbar = 0.4  # 0.001
+        self.axon(0.5).Nafin.gnafbar = 0.4  # random.gauss(0.4, 0.1) #0.4  # 0.4  # 0.5
+        self.axon(0.5).kdrin.gkdrbar = 0.4  # random.gauss(0.4, 0.1) #0.4  # 0.001
         self.axon(0.5).pas.g = 0.001  # 0.0002
         self.axon(0.5).pas.e = -65  # -73
         self.axon.Ra = 100
@@ -185,8 +185,8 @@ class Bask23(Cell):
             sec.cm = 1  # 1.2
             sec.ena = 50.
             sec.ek = -100  # -90
-            
-            logging.info(sec.psection())
+
+            # logging.info(sec.psection())
         # ek = -100.
         # e = -65.
         # ena = 50.
@@ -197,6 +197,8 @@ class Bask23(Cell):
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class Axax23(Cell):  #
@@ -215,14 +217,14 @@ class Axax23(Cell):  #
                             'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).naf2.gbar = 0.75  # 0.06  # 0.75
-        self.soma(0.5).nap.gnapbar = 0.0006
-        self.soma(0.5).kdrin.gkdrbar = 0.1  # 0.001
+        self.soma(0.5).naf2.gbar = random.gauss(0.75, 0.1)  # 0.75  # 0.06  # 0.75
+        self.soma(0.5).nap.gnapbar = random.gauss(0.0006, 0.0001)  # 0.0006
+        self.soma(0.5).kdrin.gkdrbar = 0.11070835  # random.gauss(0.1, 0.2) #0.1  # 0.001
         self.soma(0.5).IKsin.gKsbar = 0.000725 * 0.1
         self.soma(0.5).hin.gbar = 0.00001
         self.soma(0.5).kapin.gkabar = 0.0032 * 15
         self.soma(0.5).canin.gcalbar = 0.0003  # 0.0001  # 0.0003
-        self.soma(0.5).kctin.gkcbar = 0.025
+        self.soma(0.5).kctin.gkcbar = random.gauss(0.025, 0.1)  # 0.025
         self.soma(0.5).pas.g = 0.002
         self.soma(0.5).pas.e = -65  # -70
         self.soma.Ra = 200  # 100
@@ -279,8 +281,8 @@ class Axax23(Cell):  #
         for mechanism_a in ['Nafin', 'kdrin', 'pas']:
             self.axon.insert(mechanism_a)
 
-        self.axon(0.5).Nafin.gnafbar = 0.4
-        self.axon(0.5).kdrin.gkdrbar = 0.4  # 0.001
+        self.axon(0.5).Nafin.gnafbar = 0.4  # random.gauss(0.4, 0.1) #0.4
+        self.axon(0.5).kdrin.gkdrbar = 0.4  # random.gauss(0.4, 0.1) #0.4  # 0.001
         self.axon(0.5).pas.g = 0.001  # 0.0002
         self.axon(0.5).pas.e = -65  # -73
         self.axon.Ra = 100
@@ -290,7 +292,7 @@ class Axax23(Cell):  #
             sec.cm = 1  # 0.9
             sec.ena = 50.
             sec.ek = -100.
-            
+
             # sec.eca =   125.
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
@@ -299,6 +301,7 @@ class Axax23(Cell):  #
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
 
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class LTS23(Cell):  #
@@ -316,12 +319,12 @@ class LTS23(Cell):  #
                             'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Nafin.gnafbar = 0.45  # 0.06  # 0.45
-        self.soma(0.5).kdrin.gkdrbar = 0.1 * 5  # 0.0001
-        self.soma(0.5).IKsin.gKsbar = 0.000725 * 0.1
+        self.soma(0.5).Nafin.gnafbar = 0.44  # random.gauss(0.44, 0.2) #0.45  # 0.06  # 0.45
+        self.soma(0.5).kdrin.gkdrbar = 0.5  # random.gauss(0.5, 0.2)  #0.1 * 5  # 0.0001
+        self.soma(0.5).IKsin.gKsbar = random.gauss(0.0000725, 0.00001)  # 0.000725 * 0.1
         self.soma(0.5).hin.gbar = 0.00001
         self.soma(0.5).kapin.gkabar = 0.0032 * 15  # 0.001  # 0.0032 * 15
-        self.soma(0.5).canin.gcalbar = 0.0003  # 0.0001  # 0.0003
+        self.soma(0.5).canin.gcalbar = random.gauss(0.0003, 0.0001)  # 0.0003  # 0.0001  # 0.0003
         self.soma(0.5).kctin.gkcbar = 0.025 * 5  # 0.0001
         self.soma(0.5).pas.g = 0.001  # 1 / 100
         self.soma(0.5).pas.e = -65  # -73
@@ -338,25 +341,25 @@ class LTS23(Cell):  #
             self.dend3.insert(mechanism_d)
             self.dend4.insert(mechanism_d)
 
-        self.dend(0.5).Nafin.gnafbar = 0.06  # 0.0018 * 5
+        self.dend(0.5).Nafin.gnafbar = 0.57999  # 0.06  # 0.0018 * 5
         self.dend(0.5).kdrin.gkdrbar = 0.1 * 5  # 0.018
         self.dend(0.5).kapin.gkabar = 0.001 * 5  # 0.000032 #* 15 * 10
-        self.dend(0.5).nap.gnapbar = 0.0006  # 0.000018
+        self.dend(0.5).nap.gnapbar = 0.00058  # 0.0006  # 0.000018
         self.dend(0.5).pas.g = 0.01  # 1 / 100
         self.dend(0.5).pas.e = -65  # -73
         self.dend.Ra = 200  # 150
 
         self.dend1(0.5).Nafin.gnafbar = 0.06  # 0.0018 * 5
         self.dend1(0.5).kdrin.gkdrbar = 0.1 * 5  # 0.018 * 0.5
-        self.dend1(0.5).kapin.gkabar = 0.001 * 5  # 0.000032 #* 15 * 10
+        self.dend1(0.5).kapin.gkabar = 0.0048  # 0.001 * 5  # 0.000032 #* 15 * 10
         self.dend1(0.5).pas.g = 0.02  # 1 / 100
         self.dend1(0.5).pas.e = -65  # -73
         self.dend1.Ra = 200  # 150
         self.dend1(0.5).nap.gnapbar = 0.0006  # 0.000018
 
-        self.dend2(0.5).Nafin.gnafbar = 0.01  # 0.0018 * 5
+        self.dend2(0.5).Nafin.gnafbar = 0.00999  # 0.01  # 0.0018 * 5
         self.dend2(0.5).kdrin.gkdrbar = 0.01 * 5  # 0.018 * 0.5
-        self.dend2(0.5).kapin.gkabar = 0.001 * 5  # 0.000032 #* 15 * 10
+        self.dend2(0.5).kapin.gkabar = 0.0048  # 0.001 * 5  # 0.000032 #* 15 * 10
         self.dend2(0.5).pas.g = 0.02  # 1 / 100
         self.dend2(0.5).pas.e = -65  # -73
         self.dend2.Ra = 200  # 150
@@ -398,13 +401,13 @@ class LTS23(Cell):  #
             sec.cm = 1
             sec.ena = 50.
             sec.ek = -100
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class Spinstel4(Cell):  #
@@ -422,16 +425,16 @@ class Spinstel4(Cell):  #
                             'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Nafin.gnafbar = 0.15 * 5  # 0.018 * 3
-        self.soma(0.5).nap.gnapbar = 0.00015 *5 # 0.000018
-        self.soma(0.5).calc.gcabar = 0.0001 * 0.1
-        self.soma(0.5).cal.gcalbar = 0.0005  # 0.0001 * 0.3
-        self.soma(0.5).can.gcabar = 0.0002 * 0.1
+        self.soma(0.5).Nafin.gnafbar = random.gauss(0.75, 0.1)  # 0.15 * 5  # 0.018 * 3
+        self.soma(0.5).nap.gnapbar = 0.00015 * 5  # 0.000018
+        self.soma(0.5).calc.gcabar = random.gauss(0.00001, 0.00001)  # 0.0001 * 0.1
+        self.soma(0.5).cal.gcalbar = 0.0001 * 0.3
+        self.soma(0.5).can.gcabar = random.gauss(0.00002, 0.00002)  # 1.9792746e-05  #0.0002 * 0.1
         self.soma(0.5).car.gcabar = 0.000001 * 0.3 * 0.1
         self.soma(0.5).cat.gcatbar = 0.0001  # 0.0002 * 0.3 * 0.1
-        self.soma(0.5).kdr_fs.gbar = 0.1 * 5  # 0.018 * 0.3
+        self.soma(0.5).kdr_fs.gbar = 0.5  # random.gauss(0.5, 0.2) #0.1 * 5  # 0.018 * 0.3
         self.soma(0.5).IKs.gKsbar = 0.0012 * 0.5
-        self.soma(0.5).ka.gbar = 0.0007 * 5
+        self.soma(0.5).ka.gbar = random.gauss(0.0035, 0.002)  # 0.0035322655 #0.0007 * 5
         self.soma(0.5).kca.gbar = 0.1  # 0.005 * 5
         self.soma(0.5).h.gbar = 1.8e-5 * 0.5
         self.soma(0.5).ican.gbar = 0.001 * 0.07 * 0
@@ -454,7 +457,7 @@ class Spinstel4(Cell):  #
             self.dend4.insert(mechanism_d)
 
         self.dend(0.5).Nafin.gnafbar = 0.075 * 10  # 0.018 * 0.1
-        self.dend(0.5).nap.gnapbar = 7.5E-05 * 5 # 0.000018
+        self.dend(0.5).nap.gnapbar = 7.5E-05 * 5  # 0.000018
         self.dend(0.5).calc.gcabar = 0.0001 * 0.1  #
         self.dend(0.5).cal.gcalbar = 0.0005  # 0.0001 * 0.3  #
         self.dend(0.5).can.gcabar = 0.0002 * 0.3
@@ -471,7 +474,7 @@ class Spinstel4(Cell):  #
         self.dend.Ra = 250  # 150
 
         self.dend1(0.5).Nafin.gnafbar = 0.075 * 10  # 0.018 * 0.4
-        self.dend1(0.5).nap.gnapbar = 7.5E-05*5  # 0.000018  # * 3
+        self.dend1(0.5).nap.gnapbar = 7.5E-05 * 5  # 0.000018  # * 3
         self.dend1(0.5).calc.gcabar = 0.0001 * 0.1  #
         self.dend1(0.5).cal.gcalbar = 0.0005  # 0.0001 * 0.3  #
         self.dend1(0.5).can.gcabar = 0.0002 * 0.3
@@ -488,7 +491,7 @@ class Spinstel4(Cell):  #
         self.dend1.Ra = 250  # 150
 
         self.dend2(0.5).Nafin.gnafbar = 0.005 * 10  # 0.018 * 0.1
-        self.dend2(0.5).nap.gnapbar = 5.E-06 *5 # 0.000018
+        self.dend2(0.5).nap.gnapbar = 5.E-06 * 5  # 0.000018
         self.dend2(0.5).calc.gcabar = 0.0001 * 0.1  #
         self.dend2(0.5).cal.gcalbar = 0.0005  # 0.0001 * 0.3  #
         self.dend2(0.5).can.gcabar = 0.0002 * 0.3
@@ -505,7 +508,7 @@ class Spinstel4(Cell):  #
         self.dend2.Ra = 250  # 150
 
         self.dend3(0.5).Nafin.gnafbar = 0.005 * 10  # 0.018 * 0.1
-        self.dend3(0.5).nap.gnapbar = 5.E-06 *5 # 0.000018
+        self.dend3(0.5).nap.gnapbar = 5.E-06 * 5  # 0.000018
         self.dend3(0.5).calc.gcabar = 0.0001 * 0.1  #
         self.dend3(0.5).cal.gcalbar = 0.0005  # 0.0001 * 0.3  #
         self.dend3(0.5).can.gcabar = 0.0002 * 0.3
@@ -522,7 +525,7 @@ class Spinstel4(Cell):  #
         self.dend3.Ra = 250  # 150
 
         self.dend4(0.5).Nafin.gnafbar = 0.005 * 10  # 0.018 * 0.1
-        self.dend4(0.5).nap.gnapbar = 5.E-06*5  # 0.000018
+        self.dend4(0.5).nap.gnapbar = 5.E-06 * 5  # 0.000018
         self.dend4(0.5).calc.gcabar = 0.0001 * 0.1  #
         self.dend4(0.5).cal.gcalbar = 0.0005  # 0.0001 * 0.3  #
         self.dend4(0.5).can.gcabar = 0.0002 * 0.3
@@ -553,13 +556,13 @@ class Spinstel4(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -100.  # -95.
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class EpilepsySpinstel4(Cell):  #
@@ -712,13 +715,14 @@ class EpilepsySpinstel4(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -90
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
 
 class LTS4(Cell):
@@ -733,12 +737,12 @@ class LTS4(Cell):
                             'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Nafin.gnafbar = 0.5 * 5
-        self.soma(0.5).kdrin.gkdrbar = 0.001 * 100
-        self.soma(0.5).kapin.gkabar = 0.0032 * 15
+        self.soma(0.5).Nafin.gnafbar = 2.5  # 0.5 * 5
+        self.soma(0.5).kdrin.gkdrbar = random.gauss(0.1, 0.1)  # 0.001 * 100
+        self.soma(0.5).kapin.gkabar = random.gauss(0.048, 0.01)  # 0.0032 * 15
         self.soma(0.5).canin.gcalbar = 0.0003
         self.soma(0.5).pas.g = 0.02
-        self.soma(0.5).pas.e = -73
+        self.soma(0.5).pas.e = -65
         self.soma.Ra = 100
         self.soma.eca = 125
 
@@ -765,7 +769,7 @@ class LTS4(Cell):
         self.dend1(0.5).kdrin.gkdrbar = 0.5
         self.dend1(0.5).kapin.gkabar = 0.06
         self.dend1(0.5).pas.g = 1 / 100
-        self.dend1(0.5).pas.e = -73
+        self.dend1(0.5).pas.e = -65
         self.dend1.Ra = 200  # 150
         self.dend1(0.5).nap.gnapbar = 0.005
 
@@ -773,7 +777,7 @@ class LTS4(Cell):
         self.dend2(0.5).kdrin.gkdrbar = 0.6
         self.dend2(0.5).kapin.gkabar = 0.06
         self.dend2(0.5).pas.g = 1 / 100
-        self.dend2(0.5).pas.e = -73
+        self.dend2(0.5).pas.e = -65
         self.dend2.Ra = 200  # 150
         self.dend2(0.5).nap.gnapbar = 0.005
 
@@ -781,7 +785,7 @@ class LTS4(Cell):
         self.dend3(0.5).kdrin.gkdrbar = 0.1
         self.dend3(0.5).kapin.gkabar = 0.06
         self.dend3(0.5).pas.g = 1 / 100
-        self.dend3(0.5).pas.e = -73
+        self.dend3(0.5).pas.e = -65
         self.dend3.Ra = 200  # 150
         self.dend3(0.5).nap.gnapbar = 0.001
 
@@ -789,7 +793,7 @@ class LTS4(Cell):
         self.dend4(0.5).kdrin.gkdrbar = 0.1
         self.dend4(0.5).kapin.gkabar = 0.06
         self.dend4(0.5).pas.g = 1 / 100
-        self.dend4(0.5).pas.e = -73
+        self.dend4(0.5).pas.e = -65
         self.dend4.Ra = 200  # 150
         self.dend4(0.5).nap.gnapbar = 0.001
 
@@ -805,7 +809,7 @@ class LTS4(Cell):
         self.axon(0.5).Nafin.gnafbar = 0.4
         self.axon(0.5).kdrin.gkdrbar = 0.4  # 0.001
         self.axon(0.5).pas.g = 0.02
-        self.axon(0.5).pas.e = -73
+        self.axon(0.5).pas.e = -65
         self.axon.Ra = 100
         self.axon.cm = 1.2
 
@@ -814,12 +818,14 @@ class LTS4(Cell):
             # sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -90
-            
+
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
 
 class TuftIB5(Cell):
@@ -839,10 +845,10 @@ class TuftIB5(Cell):
                             'ar', 'cad_cc', 'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Naf.gnafbar = 0.6  # 0.2  # 0.6
+        self.soma(0.5).Naf.gnafbar = 0.6  # random.gauss(0.6, 0.2) #0.5934815 #0.6  # 0.2  # 0.6
         self.soma(0.5).napf.gbar = 0.0008  # 0.00006
-        self.soma(0.5).kdr.gkdrbar = 0.5  # 0.17  # 0.5
-        self.soma(0.5).kc.gbar = 0.008 * 2  # 0.01
+        self.soma(0.5).kdr.gkdrbar = 0.5  # random.gauss(0.5, 0.2) #0.5  # 0.17  # 0.5
+        self.soma(0.5).kc.gbar = random.gauss(0.016, 0.01)  # 0.008 * 2  # 0.01
         self.soma(0.5).ka_ib.gbar = 0.02  # 0.005
         self.soma(0.5).km_cc.gbar = 0.0085 * 1.4  # 0.02  # 0.0005
         self.soma(0.5).k2_cc.gbar = 0.0005  # 0.0085  # 0.0005
@@ -957,8 +963,8 @@ class TuftIB5(Cell):
         for mechanism_a in ['Nafin', 'kdrin', 'pas']:
             self.axon.insert(mechanism_a)
 
-        self.axon(0.5).Nafin.gnafbar = 0.45  # 0.4
-        self.axon(0.5).kdrin.gkdrbar = 0.45  # 0.001
+        self.axon(0.5).Nafin.gnafbar = 0.45  # random.gauss(0.45, 0.1) #0.45  # 0.4
+        self.axon(0.5).kdrin.gkdrbar = 0.45  # random.gauss(0.45, 0.1) #0.45  # 0.001
         self.axon(0.5).pas.g = 0.001  # 0.005
         self.axon(0.5).pas.e = -70
         self.axon.Ra = 100.
@@ -968,13 +974,13 @@ class TuftIB5(Cell):
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -95
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class EpilepsyTuftIB5(Cell):
@@ -1129,7 +1135,6 @@ class EpilepsyTuftIB5(Cell):
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -90
-            
 
         # self.dend1(0.5).Nafin.gnafbar = 0.00018 * 10
         # self.dend1(0.5).kdrin.gkdrbar = 0.00018 * 0.5
@@ -1170,6 +1175,8 @@ class EpilepsyTuftIB5(Cell):
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
         # self.cyt = rxd.Region(self.all, name='cyt', nrn_region='i', dx=1.0,
         #                       geometry=rxd.FractionalVolume(0.9, surface_fraction=1.0))
@@ -1202,12 +1209,12 @@ class TuftRS5(Cell):  #
                             'cad_cc']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Naf.gnafbar = 0.2
+        self.soma(0.5).Naf.gnafbar = 0.199  # random.gauss(0.2, 0.2)  #0.2
         self.soma(0.5).nap.gnapbar = 0.0008 * 0.2
-        self.soma(0.5).kdr.gkdrbar = 0.17
+        self.soma(0.5).kdr.gkdrbar = 0.169  # random.gauss(0.17, 0.2)  #0.17
         self.soma(0.5).ka_cc.gbar = 0.02  # 0.005
         self.soma(0.5).km_cc.gbar = 0.0085  # 0.0005
-        self.soma(0.5).kc.gbar = 0.008 * 3.6  # 0.01
+        self.soma(0.5).kc.gbar = random.gauss(0.0288, 0.01)  # 0.008 * 3.6  # 0.01
         self.soma(0.5).k2_cc.gbar = 0.0005
         self.soma(0.5).kahp_deeppyr.gbar = 0.0002  # 0.0001
         self.soma(0.5).cal_cc.gbar = 0.004 * 0.4  # 0.0001
@@ -1331,13 +1338,13 @@ class TuftRS5(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -95
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class EpilepsyTuftRS5(Cell):  #
@@ -1492,13 +1499,13 @@ class EpilepsyTuftRS5(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -90
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
         # self.cyt = rxd.Region(self.all, name='cyt', nrn_region='i', dx=1.0,
         #                       geometry=rxd.FractionalVolume(0.9, surface_fraction=1.0))
@@ -1532,10 +1539,10 @@ class Bask56(Cell):
                             'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Nafin.gnafbar = 0.06  # 0.45
+        self.soma(0.5).Nafin.gnafbar = 0.06  # random.gauss(0.06, 0.02) #0.05961001 #0.06  # 0.45
         self.soma(0.5).nap.gnapbar = 0.0006  # 0.000018
-        self.soma(0.5).kdrin.gkdrbar = 0.1  # 0.001
-        self.soma(0.5).kapin.gkabar = 0.001  # 0.0032 * 15
+        self.soma(0.5).kdrin.gkdrbar = 0.1  # random.gauss(0.1, 0.2) #0.1  # 0.001
+        self.soma(0.5).kapin.gkabar = random.gauss(0.001, 0.001)  # 0.001  # 0.0032 * 15
         self.soma(0.5).canin.gcalbar = 0.0003
         self.soma(0.5).kctin.gkcbar = 0.025  # 0.0001
         self.soma(0.5).pas.g = 0.001
@@ -1607,13 +1614,13 @@ class Bask56(Cell):
             sec.cm = 1
             sec.ena = 50.
             sec.ek = -100.
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class Axax56(Cell):  #
@@ -1634,15 +1641,15 @@ class Axax56(Cell):  #
                             'cad_cc']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).naf2_cc.gbar = 0.65
+        self.soma(0.5).naf2_cc.gbar = random.gauss(0.65, 0.1)  # 0.65
         self.soma(0.5).napf_spinstell.gbar = 0.0006  # 0.0002
-        self.soma(0.5).kdr_fs_cc.gbar = 0.1  # 0.1 * 10
-        self.soma(0.5).kc_fast_cc.gbar = 0.025 * 2  # 0.001 * 10
+        self.soma(0.5).kdr_fs_cc.gbar = random.gauss(0.1, 0.1)  # 0.1  # 0.1 * 10
+        self.soma(0.5).kc_fast_cc.gbar = random.gauss(0.05, 0.01)  # 0.025 * 2  # 0.001 * 10
         self.soma(0.5).ka_cc.gbar = 0.03 * 2
         self.soma(0.5).km_cc.gbar = 0.0005 * 2  # 0.00375
-        self.soma(0.5).k2_cc.gbar = 0.0005 * 2  # 0.0001
+        self.soma(0.5).k2_cc.gbar = random.gauss(0.001, 0.002)  # 0.0005 * 2  # 0.0001
         self.soma(0.5).kahp_slower.gbar = 0.0001
-        self.soma(0.5).cal_cc.gbar = 0.0001  # 0.0005
+        self.soma(0.5).cal_cc.gbar = random.gauss(0.0001, 0.0002)  # 0.0001  # 0.0005
         self.soma(0.5).cat_cc.gbar = 5.E-05  # 0.0001
         self.soma(0.5).ar.gbar = 2.5E-05  # 0.00025
         self.soma(0.5).cad_cc.beta = 0.02
@@ -1764,13 +1771,13 @@ class Axax56(Cell):  #
             sec.cm = 1.  # 0.9
             sec.ena = 50.
             sec.ek = -100
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class LTS56(Cell):  #
@@ -1789,9 +1796,9 @@ class LTS56(Cell):  #
                             'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Nafin.gnafbar = 0.06  # 0.25
-        self.soma(0.5).kdrin.gkdrbar = 0.1  # 0.001
-        self.soma(0.5).kapin.gkabar = 0.001  # 0.0032 * 15
+        self.soma(0.5).Nafin.gnafbar = 0.058  # random.gauss(0.06, 0.01) #0.06  # 0.25
+        self.soma(0.5).kdrin.gkdrbar = random.gauss(0.1, 0.1)  # 0.1  # 0.001
+        self.soma(0.5).kapin.gkabar = random.gauss(0.001, 0.002)  # 0.001  # 0.0032 * 15
         self.soma(0.5).canin.gcalbar = 0.0001  # 0.0003
         self.soma(0.5).kctin.gkcbar = 0.025  # 0.0001
         self.soma(0.5).pas.g = 0.001  # 0.0002
@@ -1807,23 +1814,23 @@ class LTS56(Cell):  #
             self.dend3.insert(mechanism_d)
             self.dend4.insert(mechanism_d)
 
-        self.dend(0.5).Nafin.gnafbar = 0.06  # 0.018 * 10
+        self.dend(0.5).Nafin.gnafbar = 0.0578  # 0.06  # 0.018 * 10
         self.dend(0.5).kdrin.gkdrbar = 0.1 * 2  # 0.018
-        self.dend(0.5).kapin.gkabar = 0.001 * 2  # 0.000032  # * 15 * 10
+        self.dend(0.5).kapin.gkabar = 0.00178  # 0.0018 #0.001 * 2  # 0.000032  # * 15 * 10
         self.dend(0.5).nap.gnapbar = 0.0006  # 0.000018
         self.dend(0.5).pas.g = 1 / 100
         self.dend(0.5).pas.e = -65  # -73
         self.dend.Ra = 200  # 150
 
-        self.dend1(0.5).Nafin.gnafbar = 0.06  # 0.018 * 5
+        self.dend1(0.5).Nafin.gnafbar = 0.0579  # 0.06  # 0.018 * 5
         self.dend1(0.5).kdrin.gkdrbar = 0.1 * 2  # 0.018 * 0.5
-        self.dend1(0.5).kapin.gkabar = 0.001 * 2  # 0.000032  # * 15 * 10
+        self.dend1(0.5).kapin.gkabar = 0.00189  # 0.001 * 2  # 0.000032  # * 15 * 10
         self.dend1(0.5).pas.g = 1 / 100
         self.dend1(0.5).pas.e = -65  # -73
         self.dend1.Ra = 200  # 150
         self.dend1(0.5).nap.gnapbar = 0.0006  # 0.000018
 
-        self.dend2(0.5).Nafin.gnafbar = 0.01  # 0.018 * 5
+        self.dend2(0.5).Nafin.gnafbar = 0.09  # 0.01  # 0.018 * 5
         self.dend2(0.5).kdrin.gkdrbar = 0.01 * 2  # 0.018 * 0.5
         self.dend2(0.5).kapin.gkabar = 0.001 * 2  # 0.000032  # * 15 * 10
         self.dend2(0.5).pas.g = 1 / 100
@@ -1862,13 +1869,13 @@ class LTS56(Cell):  #
             sec.cm = 1
             sec.ena = 50.
             sec.ek = -100.
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class NontuftRS6(Cell):  #
@@ -1887,12 +1894,12 @@ class NontuftRS6(Cell):  #
                             'kahp_deeppyr', 'cal_cc', 'cat_a', 'ar', 'cad_cc']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Naf.gnafbar = 0.2  # 0.6
+        self.soma(0.5).Naf.gnafbar = random.gauss(0.2, 0.1)  # 0.2  # 0.6
         self.soma(0.5).napf.gbar = 0.0008  # 0.00006
-        self.soma(0.5).kdr.gkdrbar = 0.17  # 0.5
+        self.soma(0.5).kdr.gkdrbar = random.gauss(0.17, 0.1)  # 0.17  # 0.5
         self.soma(0.5).ka_cc.gbar = 0.119  # 0.005
         self.soma(0.5).km_cc.gbar = 0.0042  # 0.0005
-        self.soma(0.5).kc.gbar = 0.0075 * 2  # 0.01
+        self.soma(0.5).kc.gbar = random.gauss(0.015, 0.01)  # 0.0075 * 2  # 0.01
         self.soma(0.5).k2_cc.gbar = 0.0001  # 0.0005
         self.soma(0.5).kahp_deeppyr.gbar = 0.0002
         self.soma(0.5).cal_cc.gbar = 0.0002  # 0.0001
@@ -2017,13 +2024,14 @@ class NontuftRS6(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -95
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
 
 class EpilepsyNontuftRS6(Cell):  #
@@ -2277,7 +2285,7 @@ class EpilepsyNontuftRS6(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -90
-            
+
         # self.dend1(0.5).Nafin.gnafbar = 0.00018 * 10
         # self.dend1(0.5).kdrin.gkdrbar = 0.00018 * 0.5
         # self.dend1(0.5).kapin.gkabar = 0.000032 #* 15 * 10
@@ -2317,6 +2325,8 @@ class EpilepsyNontuftRS6(Cell):  #
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
         # self.cyt = rxd.Region(self.all, name='cyt', nrn_region='i', dx=1.0,
         #                       geometry=rxd.FractionalVolume(0.9, surface_fraction=1.0))
@@ -2350,11 +2360,11 @@ class SyppyrFRB(Cell):  #
                             'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Naf.gnafbar = 0.15 * 1.25 *5  # 187.5*0.001 #0.018 * 3
-        self.soma(0.5).nap.gnapbar = 0.0006 * 0.2 *5 # 0.48*0.001 #0.000018
-        self.soma(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3
+        self.soma(0.5).Naf.gnafbar = random.gauss(0.9375, 0.1)  # 0.15 * 1.25 *5  # 187.5*0.001 #0.018 * 3
+        self.soma(0.5).nap.gnapbar = 0.0006 * 0.2 * 5  # 0.48*0.001 #0.000018
+        self.soma(0.5).cal.gcalbar = random.gauss(0.001, 0.001)  # 0.001  # 0.0001 * 0.3
         self.soma(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1
-        self.soma(0.5).kdrpr.gkdrbar = 0.1 * 1.25  # 125*0.001 #0.018 * 0.3
+        self.soma(0.5).kdrpr.gkdrbar = random.gauss(0.125, 0.1)  # 0.1 * 1.25  # 125*0.001 #0.018 * 0.3
         self.soma(0.5).ka.gbar = 30 * 0.001  # 0.0007
         self.soma(0.5).kca.gbar = 4.5 * 0.001 * 1.6  # 0.005 * 5
         self.soma(0.5).pas.g = 0.001
@@ -2375,19 +2385,19 @@ class SyppyrFRB(Cell):  #
             self.dend3.insert(mechanism_d)
             self.dend4.insert(mechanism_d)
 
-        self.dend(0.5).Naf.gnafbar = 0.075 * 1.25 *5 # 93.75 * 0.001 #0.018 * 0.1
-        self.dend(0.5).nap.gnapbar = 0.0003 * 0.2  *5# 0.24*0.001 #0.000018
+        self.dend(0.5).Naf.gnafbar = 0.075 * 1.25 * 5  # 93.75 * 0.001 #0.018 * 0.1
+        self.dend(0.5).nap.gnapbar = 0.0003 * 0.2 * 5  # 0.24*0.001 #0.000018
         self.dend(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
         self.dend(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
         self.dend(0.5).kdrpr.gkdrbar = 0.075 * 1.25  # 93.75*0.001 #0.018 * 0.09
         self.dend(0.5).ka.gbar = 2 * 0.001  # 0.0007
         self.dend(0.5).kca.gbar = 4.5 * 0.001 * 0.4  # 0.005 * 5 * 0.001  #
         self.dend(0.5).pas.g = 0.01
-        self.dend(0.5).pas.e = -65 # -65
+        self.dend(0.5).pas.e = -65  # -65
         self.dend.Ra = 250  # 150
 
-        self.dend1(0.5).Naf.gnafbar = 0.01 * 1.25*5  # 12.5*0.001 #0.018 * 0.4
-        self.dend1(0.5).nap.gnapbar = 0.032 * 0.001 * 0.2 *5 # 0.000018  # * 3
+        self.dend1(0.5).Naf.gnafbar = 0.01 * 1.25 * 5  # 12.5*0.001 #0.018 * 0.4
+        self.dend1(0.5).nap.gnapbar = 0.032 * 0.001 * 0.2 * 5  # 0.000018  # * 3
         self.dend1(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
         self.dend1(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
         self.dend1(0.5).kdrpr.gkdrbar = 0.005 * 1.25  # 6.25*0.001#0.018 * 0.09
@@ -2397,8 +2407,8 @@ class SyppyrFRB(Cell):  #
         self.dend1(0.5).pas.e = -65  # -65
         self.dend1.Ra = 250  # 150
 
-        self.dend2(0.5).Naf.gnafbar = 0.01 * 1.25  *5# 12.5*0.001#0.018 * 0.1
-        self.dend2(0.5).nap.gnapbar = 4.E-05 * 0.2  *5# 0.032*0.001 #0.000018
+        self.dend2(0.5).Naf.gnafbar = 0.01 * 1.25 * 5  # 12.5*0.001#0.018 * 0.1
+        self.dend2(0.5).nap.gnapbar = 4.E-05 * 0.2 * 5  # 0.032*0.001 #0.000018
         self.dend2(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
         self.dend2(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
         self.dend2(0.5).kdrpr.gkdrbar = 0.005 * 1.25  # 6.25*0.001#0.018 * 0.09
@@ -2408,19 +2418,19 @@ class SyppyrFRB(Cell):  #
         self.dend2(0.5).pas.e = -65  # -65
         self.dend2.Ra = 250  # 150
 
-        self.dend3(0.5).Naf.gnafbar = 0.1 * 1.25 *5 # 125*0.001#0.018 * 0.1
-        self.dend3(0.5).nap.gnapbar = 0.0004 * 0.2 *5 # 0.32*0.001#0.000018
+        self.dend3(0.5).Naf.gnafbar = 0.1 * 1.25 * 5  # 125*0.001#0.018 * 0.1
+        self.dend3(0.5).nap.gnapbar = 0.0004 * 0.2 * 5  # 0.32*0.001#0.000018
         self.dend3(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
         self.dend3(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
         self.dend3(0.5).kdrpr.gkdrbar = 0.1 * 1.25  # 125*0.001#0.018 * 0.09
         self.dend3(0.5).ka.gbar = 0.03  # 30*0.001#0.0007
         self.dend3(0.5).kca.gbar = 0.0075 * 1.6  # 4.5*0.001 #0.005 * 5 * 0.001  #
         self.dend3(0.5).pas.g = 0.01
-        self.dend3(0.5).pas.e = -65 # -65
+        self.dend3(0.5).pas.e = -65  # -65
         self.dend3.Ra = 250  # 150
 
-        self.dend4(0.5).Naf.gnafbar = 0.075 * 1.25  *5# 93.75*0.001 #0.018 * 0.1
-        self.dend4(0.5).nap.gnapbar = 0.0003 * 0.2 *5 # 0.024*0.001 #0.000018
+        self.dend4(0.5).Naf.gnafbar = 0.075 * 1.25 * 5  # 93.75*0.001 #0.018 * 0.1
+        self.dend4(0.5).nap.gnapbar = 0.0003 * 0.2 * 5  # 0.024*0.001 #0.000018
         self.dend4(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
         self.dend4(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
         self.dend4(0.5).kdrpr.gkdrbar = 0.075 * 1.25  # 93.75*0.001 #0.018 * 0.09
@@ -2437,7 +2447,7 @@ class SyppyrFRB(Cell):  #
         self.axon(0.5).Nafin.gnafbar = 0.4
         self.axon(0.5).kdrin.gkdrbar = 0.4  # 0.001
         self.axon(0.5).pas.g = 0.001  # 0.0002
-        self.axon(0.5).pas.e = -65 # -73
+        self.axon(0.5).pas.e = -65  # -73
         self.axon.Ra = 100
         self.axon.cm = 1.2
 
@@ -2445,13 +2455,14 @@ class SyppyrFRB(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -95.
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
 
 class SyppyrRS(Cell):  #
@@ -2471,11 +2482,11 @@ class SyppyrRS(Cell):  #
                             'cadyn', 'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).Naf.gnafbar = 1.25 * 0.15  *5# 187.5*0.001 # 0.018 * 3
-        self.soma(0.5).nap.gnapbar = 0.0006 *5 # 0.12*0.001 #0.000018
-        self.soma(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3
+        self.soma(0.5).Naf.gnafbar = 0.1877  # random.gauss(0.1875, 0.1) #1.25 * 0.15  *5# 187.5*0.001 # 0.018 * 3
+        self.soma(0.5).nap.gnapbar = 0.0006 * 5  # 0.12*0.001 #0.000018
+        self.soma(0.5).cal.gcalbar = random.gauss(0.001, 0.001)  # 0.001  # 0.0001 * 0.3
         self.soma(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1
-        self.soma(0.5).kdrpr.gkdrbar = 1.25  # 125*0.001 #0.018 * 0.3
+        self.soma(0.5).kdrpr.gkdrbar = 1.26  # random.gauss(1.25, 1) #1.25  # 125*0.001 #0.018 * 0.3
         self.soma(0.5).ka.gbar = 30 * 0.001  # 0.0007
         self.soma(0.5).kca.gbar = 0.0075  # 12*0.001#0.005 * 5
         self.soma(0.5).ar.gbar = 0.00025
@@ -2497,8 +2508,8 @@ class SyppyrRS(Cell):  #
             self.dend3.insert(mechanism_d)
             self.dend4.insert(mechanism_d)
 
-        self.dend(0.5).Naf.gnafbar = 1.25 * 0.075 *5 # 93.75*0.001 #0.018 * 0.1
-        self.dend(0.5).nap.gnapbar = 0.0003  *5# 0.06 #0.000018
+        self.dend(0.5).Naf.gnafbar = 1.25 * 0.075 * 5  # 93.75*0.001 #0.018 * 0.1
+        self.dend(0.5).nap.gnapbar = 0.00168  # new #0.0003  *5# 0.06 #0.000018
         self.dend(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
         self.dend(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
         self.dend(0.5).kdrpr.gkdrbar = 1.25  # 93.75*0.001 #0.018 * 0.09
@@ -2509,20 +2520,20 @@ class SyppyrRS(Cell):  #
         self.dend(0.5).pas.e = -65
         self.dend.Ra = 250  # 150
 
-        self.dend1(0.5).Naf.gnafbar = 1.25 * 0.01*5  # 12.5*0.001#0.018 * 0.4
-        self.dend1(0.5).nap.gnapbar = 4.E-05 *5  # 0.008*0.001 #0.000018  # * 3
-        self.dend1(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
+        self.dend1(0.5).Naf.gnafbar = 1.25 * 0.01 * 5  # 12.5*0.001#0.018 * 0.4
+        self.dend1(0.5).nap.gnapbar = 4.E-05 * 5  # 0.008*0.001 #0.000018  # * 3
+        self.dend1(0.5).cal.gcalbar = 0.00098  # new #0.001  # 0.0001 * 0.3  #
         self.dend1(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
         self.dend1(0.5).kdrpr.gkdrbar = 1.25  # 6.25*0.001 #0.018 * 0.09
         self.dend1(0.5).ka.gbar = 2 * 0.001  # 0.0007
-        self.dend1(0.5).kca.gbar = 0.0075  # 12*0.001 #0.005 * 5 * 0.0001  #
+        self.dend1(0.5).kca.gbar = 0.007488  # new #0.0075  # 12*0.001 #0.005 * 5 * 0.0001  #
         self.dend1(0.5).ar.gbar = 0.00025
         self.dend1(0.5).pas.g = 0.01
         self.dend1(0.5).pas.e = -65
         self.dend1.Ra = 250  # 150
 
-        self.dend2(0.5).Naf.gnafbar = 1.25 * 0.01 *5 # 12/5*0.001 #0.018 * 0.1
-        self.dend2(0.5).nap.gnapbar = 4.E-05 *5 # 0.008*0.001 #0.000018
+        self.dend2(0.5).Naf.gnafbar = 1.25 * 0.01 * 5  # 12/5*0.001 #0.018 * 0.1
+        self.dend2(0.5).nap.gnapbar = 4.E-05 * 5  # 0.008*0.001 #0.000018
         self.dend2(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
         self.dend2(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
         self.dend2(0.5).kdrpr.gkdrbar = 1.25  # 6.25*0.001#0.018 * 0.09
@@ -2530,14 +2541,14 @@ class SyppyrRS(Cell):  #
         self.dend2(0.5).kca.gbar = 0.0075  # 12*0.001 #0.005 * 5 * 0.001  #
         self.dend2(0.5).ar.gbar = 0.00025
         self.dend2(0.5).pas.g = 0.01
-        self.dend2(0.5).pas.e =  -65
+        self.dend2(0.5).pas.e = -65
         self.dend2.Ra = 250  # 150
 
-        self.dend3(0.5).Naf.gnafbar = 1.25 * 0.1 *5 # 125*0.001 #0.018 * 0.1
-        self.dend3(0.5).nap.gnapbar = 0.0004 *5 # 0.08*0.001 #0.000018
+        self.dend3(0.5).Naf.gnafbar = 1.25 * 0.1 * 5  # 125*0.001 #0.018 * 0.1
+        self.dend3(0.5).nap.gnapbar = 0.0004 * 5  # 0.08*0.001 #0.000018
         self.dend3(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
         self.dend3(0.5).cat.gcatbar = 0.0001  # 0.01*0.001 #0.0002 * 0.3 * 0.1  #
-        self.dend3(0.5).kdrpr.gkdrbar = 1.25   # 125*0.001 #0.018 * 0.09
+        self.dend3(0.5).kdrpr.gkdrbar = 1.25  # 125*0.001 #0.018 * 0.09
         self.dend3(0.5).ka.gbar = 30 * 0.001  # 0.0007
         self.dend3(0.5).kca.gbar = 0.0075  # 12*0.001 #0.005 * 5 * 0.001  #
         self.dend3(0.5).ar.gbar = 0.00025
@@ -2545,11 +2556,11 @@ class SyppyrRS(Cell):  #
         self.dend3(0.5).pas.e = -65
         self.dend3.Ra = 250  # 150
 
-        self.dend4(0.5).Naf.gnafbar = 1.25 * 0.075  *5# 93.75*0.001 #0.018 * 0.1
-        self.dend4(0.5).nap.gnapbar = 0.0003 *5 # 0.06*0.001 #0.000018
-        self.dend4(0.5).cal.gcalbar = 0.001  # 0.0001 * 0.3  #
+        self.dend4(0.5).Naf.gnafbar = 0.468748  # new #1.25 * 0.075  *5# 93.75*0.001 #0.018 * 0.1
+        self.dend4(0.5).nap.gnapbar = 0.0003 * 5  # 0.06*0.001 #0.000018
+        self.dend4(0.5).cal.gcalbar = 0.00098  # new #0.001  # 0.0001 * 0.3  #
         self.dend4(0.5).cat.gcatbar = 0.1 * 0.001  # 0.0002 * 0.3 * 0.1  #
-        self.dend4(0.5).kdrpr.gkdrbar = 1.25   # 93.75*0.001 #0.018 * 0.09
+        self.dend4(0.5).kdrpr.gkdrbar = 1.25  # 93.75*0.001 #0.018 * 0.09
         self.dend4(0.5).ka.gbar = 2 * 0.001  # 0.0007
         self.dend4(0.5).kca.gbar = 0.0075  # 12*0.001 #0.005 * 5 * 0.001  #
         self.dend4(0.5).ar.gbar = 0.00025
@@ -2572,13 +2583,14 @@ class SyppyrRS(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -95.
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
 
 class EpilepsySyppyrFRB(Cell):  #
@@ -2722,13 +2734,14 @@ class EpilepsySyppyrFRB(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -90
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
 
 class EpilepsySyppyrRS(Cell):  #
@@ -2871,13 +2884,14 @@ class EpilepsySyppyrRS(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -90
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
 
 
 # ============Thalamus=============
@@ -2897,18 +2911,18 @@ class TCR(Cell):  #
                             'ar', 'cad_cc', 'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).naf_tcr.gbar = 0.6  # 0.1  # 0.6
+        self.soma(0.5).naf_tcr.gbar = 0.589  # new #0.6  # 0.1  # 0.6
         self.soma(0.5).napf_tcr.gbar = 0.0002  # 0.00006
         self.soma(0.5).kdr.gkdrbar = 0.75  # 0.5
         self.soma(0.5).kc.gbar = 0.01
-        self.soma(0.5).ka_cc.gbar = 0.03  # 0.005
+        self.soma(0.5).ka_cc.gbar = 0.02889  # 0.03  # 0.005
         self.soma(0.5).km_cc.gbar = 0.0005
         self.soma(0.5).k2_cc.gbar = 0.002  # 0.0005
         self.soma(0.5).kahp_slower.gbar = 0  # 5.E-05
         self.soma(0.5).cal_cc.gbar = 0.0005  # 0.0001
         self.soma(0.5).cat_a.gbar = 0.0005  # 5.E-05
         self.soma(0.5).ar.gbar = 0.00025  # 2.5E-05
-        self.soma(0.5).cad_cc.beta = 0.02
+        self.soma(0.5).cad_cc.beta = 0.01899  # new #0.02
         self.soma(0.5).cad_cc.phi = 52000.  # 10400.
         self.soma(0.5).pas.e = -70
         self.soma(0.5).pas.g = 0.001
@@ -2926,13 +2940,13 @@ class TCR(Cell):  #
             self.dend3.insert(mechanism_d)
             self.dend4.insert(mechanism_d)
 
-        self.dend(0.5).naf_tcr.gbar = 0.1
+        self.dend(0.5).naf_tcr.gbar = 0.899  # new #0.1
         self.dend(0.5).napf_tcr.gbar = 0.0002
         self.dend(0.5).kdr_thlms.gbar = 0.05  # 0.075
-        self.dend(0.5).kc.gbar = 0.012
+        self.dend(0.5).kc.gbar = 0.011899  # new #0.012
         self.dend(0.5).ka.gbar = 0.03
         self.dend(0.5).km.gbar = 0.0005
-        self.dend(0.5).k2.gbar = 0.002
+        self.dend(0.5).k2.gbar = 0.001899  # new#0.002
         self.dend(0.5).cal_thlms.gbar = 0.0005
         self.dend(0.5).cat_thlms.gbar = 0.005  # 0.0005
         self.dend(0.5).ar.gbar = 0.0005  # 0.00025
@@ -2958,17 +2972,17 @@ class TCR(Cell):  #
         self.dend1(0.5).pas.e = -70
         self.dend1.Ra = 175
 
-        self.dend2(0.5).naf_tcr.gbar = 0.1  # 0.005  # 0.1
+        self.dend2(0.5).naf_tcr.gbar = 0.098  # new #0.1  # 0.005  # 0.1
         self.dend2(0.5).napf_tcr.gbar = 0.0002  # 1.E-05  # 0.0002
         self.dend2(0.5).kdr_thlms.gbar = 0.075
-        self.dend2(0.5).kc.gbar = 0.02  # 0.012
+        self.dend2(0.5).kc.gbar = 0.0198  # new #0.02  # 0.012
         self.dend2(0.5).ka.gbar = 0.001  # 0.03
         self.dend2(0.5).km.gbar = 0  # // 0.0005
         self.dend2(0.5).k2.gbar = 0.002
         self.dend2(0.5).cal_thlms.gbar = 0.00025  # 0.0005
         self.dend2(0.5).cat_thlms.gbar = 0.0005
         self.dend2(0.5).ar.gbar = 0.0003  # 0.00025
-        self.dend2(0.5).cad.beta = 0.05  # 0.02
+        self.dend2(0.5).cad.beta = 0.04899  # new #0.05  # 0.02
         self.dend2(0.5).cad.phi = 104000.  # 52000.
         self.dend2(0.5).pas.g = 1 / 100
         self.dend2(0.5).pas.e = -70
@@ -2990,10 +3004,10 @@ class TCR(Cell):  #
         self.dend3(0.5).pas.e = -70
         self.dend3.Ra = 175
 
-        self.dend4(0.5).naf_tcr.gbar = 0.1
+        self.dend4(0.5).naf_tcr.gbar = 0.098  # new #0.1
         self.dend4(0.5).napf_tcr.gbar = 0.0002  # 1.E-05  # 0.0002
         self.dend4(0.5).kdr_thlms.gbar = 0.075
-        self.dend4(0.5).kc.gbar = 0.012
+        self.dend4(0.5).kc.gbar = 0.0119  # new #0.012
         self.dend4(0.5).ka.gbar = 0.03
         self.dend4(0.5).km.gbar = 0  # // 0.0005
         self.dend4(0.5).k2.gbar = 0.002
@@ -3021,7 +3035,7 @@ class TCR(Cell):  #
             sec.cm = 0.9
             sec.ena = 50.
             sec.ek = -95
-            
+
             # sec.cm = 4.65
             # sec.Ra = 65.22
             # sec.pas.e = -85.15087381998698
@@ -3031,6 +3045,7 @@ class TCR(Cell):  #
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
 
 
 class nRT(Cell):  #
@@ -3047,7 +3062,7 @@ class nRT(Cell):  #
                             'cat_a', 'ar', 'cad', 'pas']:
             self.soma.insert(mechanism_s)
 
-        self.soma(0.5).naf2.gbar = 0.06  # 0.4
+        self.soma(0.5).naf2.gbar = 0.6  # 0.4
         self.soma(0.5).napf.gbar = 0.0006
         self.soma(0.5).kdr_fs.gbar = 0.06  # 0.4
         self.soma(0.5).kc.gbar = 0.01
@@ -3176,10 +3191,12 @@ class nRT(Cell):  #
             sec.cm = 1.  # 0.9
             sec.ena = 50.
             sec.ek = -100  # -95
-            
 
         self.k_vec = h.Vector().record(self.soma(0.5)._ref_ik)
         self.na_vec = h.Vector().record(self.soma(0.5)._ref_ina)
         self.na_concentration = h.Vector().record(self.soma(0.5)._ref_nai)
         self.k_concentration = h.Vector().record(self.soma(0.5)._ref_ki)
         self.v_vec = h.Vector().record(self.soma(0.5)._ref_v)
+        self.v_ex_vec = h.Vector().record(self.soma(0.5)._ref_vext[0])
+
+
