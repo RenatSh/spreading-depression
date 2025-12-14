@@ -88,7 +88,8 @@ class fiber(object):
                 diff.km_na = 10
         else:
             for sec in self.all:
-                acc = h.accum(sec(0.5))
+                sec.insert('accum')
+                acc = sec(0.5).accum
                 self.accums.append(acc)
                 sec.insert('capump')
                 sec.insert('nax')
