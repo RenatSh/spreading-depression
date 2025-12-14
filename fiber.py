@@ -72,8 +72,8 @@ class fiber(object):
         for sec in self.all: # 'all' defined in build_subsets
             sec.Ra = 100  # Axial resistance in Ohm * cm
             sec.cm = 1      # Membrane capacitance in micro Farads / cm^2
-            # sec.insert('nakpump')
-            diff = h.nakpump(sec(0.5))
+            sec.insert('nakpump')
+            diff = sec(0.5).nakpump
             self.diffs.append(diff)
             sec.insert('leak')
             sec.insert('tot')
