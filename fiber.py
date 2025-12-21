@@ -113,6 +113,7 @@ class fiber(object):
             self.soma.insert("xiong")
             self.soma.gnabar_nachan = 0.4
             #self.soma.shiftm_nachan=-10 #self.soma(0.5).nachan.shiftm = -10 #
+            self.soma.shiftn_nachan=-10
             self.soma.gnabar_nap = 0.000125
             self.soma.gkbar_ka = 0.2
             self.soma.gkbar_kdr = 0.2
@@ -140,7 +141,7 @@ class fiber(object):
                 sec.gcalbar_cal = 0.0001
                 sec.gcatbar_cat = 0.0001
                 sec.g_xiong = 0.0
-                sec.gkbar_nmda = 0.0001
+                #sec.gbar_nmda = 0.0001
 
     def build_subsets(self):
         '''
